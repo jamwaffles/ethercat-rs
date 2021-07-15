@@ -1,3 +1,5 @@
+//! Open the EtherCAT master interface and do nothing else.
+
 use ethercat::{Master, MasterAccess};
 
 fn main() -> Result<(), std::io::Error> {

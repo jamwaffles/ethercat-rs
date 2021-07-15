@@ -1,5 +1,9 @@
 # EtherCAT test
 
+## TODO
+
+- Load ESI (EtherCAT Slave Information) XML file into runtime with https://docs.rs/ethercat-esi/0.2.0/ethercat_esi/.
+
 ## Set up EtherCAT master
 
 Uses EtherCAT master from <https://etherlab.org/en/ethercat/>
