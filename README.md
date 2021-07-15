@@ -14,6 +14,8 @@ Some decent EtherCAT setup docs at <https://etherlab.org/download/ethercat/ether
 
 ```bash
 git clone https://gitlab.com/etherlab.org/ethercat.git
+# Use the 1.5 stable branch (commit 779437f)
+git checkout stable-1.5
 cd ethercat
 ./bootstrap
 # Note I'm disabling EoE (ethernet over ethercat) to squelch the annoying "could not configure
@@ -41,8 +43,10 @@ sudo ethercatctl restart
 Run the Rust code:
 
 ```bash
-ETHERCAT_PATH=/home/james/Repositories/ethercat-shit/ethercat cargo run
+ETHERCAT_PATH=/home/james/Repositories/ethercat-shit/ethercat-src cargo run
 ```
+
+Note that you might need to re-run the build above but _with_ EOE support - the bindings look for the presence of some stuff that's not compiled with `--disable-eoe`. I might PR a fix for this in the future. Doesn't cause an issue with the kernel modules.
 
 ## USB ethernet adapter
 
