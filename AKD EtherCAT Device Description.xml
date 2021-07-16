@@ -7037,7 +7037,7 @@
 									</Flags>
 								</SubItem>
 							</DataType>
-<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
+							<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
 							<DataType>
 								<Name>DT34B0ARR</Name>
 								<BaseType>UDINT</BaseType>
@@ -8760,7 +8760,7 @@
 							</DataType>
 						</DataTypes>
 						<Objects>
-<!--							<Object>
+							<!--							<Object>
 								<Index>#x0002</Index>
 								<Name>DummySINT</Name>
 								<Type>SINT</Type>
@@ -16572,17 +16572,17 @@
 									<Category>o</Category>
 								</Flags>
 							</Object>
-                     <Object>
-                        <Index>#x53FD</Index>
-                        <Name>VL.THRESHCUTOFFM</Name>
-                        <Type>UDINT</Type>
-                        <BitSize>32</BitSize>
-                        <Flags>
-                           <Access>rw</Access>
-                           <Category>o</Category>
-                        </Flags>
-                     </Object>
-                     <Object>
+							<Object>
+								<Index>#x53FD</Index>
+								<Name>VL.THRESHCUTOFFM</Name>
+								<Type>UDINT</Type>
+								<BitSize>32</BitSize>
+								<Flags>
+									<Access>rw</Access>
+									<Category>o</Category>
+								</Flags>
+							</Object>
+							<Object>
 								<Index>#x5403</Index>
 								<Name>HOME.IPEAKACTIVEM</Name>
 								<Type>UDINT</Type>
@@ -25538,7 +25538,7 @@
 									</Flags>
 								</SubItem>
 							</DataType>
-<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
+							<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
 							<DataType>
 								<Name>DT34B0ARR</Name>
 								<BaseType>UDINT</BaseType>
@@ -27159,7 +27159,7 @@
 							</DataType>
 						</DataTypes>
 						<Objects>
-<!--							<Object>
+							<!--							<Object>
 								<Index>#x0002</Index>
 								<Name>DummySINT</Name>
 								<Type>SINT</Type>
@@ -43510,7 +43510,7 @@
 									</Flags>
 								</SubItem>
 							</DataType>
-<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
+							<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
 							<DataType>
 								<Name>DT34B0ARR</Name>
 								<BaseType>UDINT</BaseType>
@@ -45131,7 +45131,7 @@
 							</DataType>
 						</DataTypes>
 						<Objects>
-<!--							<Object>
+							<!--							<Object>
 								<Index>#x0002</Index>
 								<Name>DummySINT</Name>
 								<Type>SINT</Type>
@@ -61776,7 +61776,7 @@
 									</Flags>
 								</SubItem>
 							</DataType>
-<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
+							<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
 							<DataType>
 								<Name>DT34B0ARR</Name>
 								<BaseType>UDINT</BaseType>
@@ -63397,7 +63397,7 @@
 							</DataType>
 						</DataTypes>
 						<Objects>
-<!--							<Object>
+							<!--							<Object>
 								<Index>#x0002</Index>
 								<Name>DummySINT</Name>
 								<Type>SINT</Type>
@@ -80147,7 +80147,7 @@
 									</Flags>
 								</SubItem>
 							</DataType>
-<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
+							<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
 							<DataType>
 								<Name>DT34B0ARR</Name>
 								<BaseType>UDINT</BaseType>
@@ -81768,7 +81768,7 @@
 							</DataType>
 						</DataTypes>
 						<Objects>
-<!--							<Object>
+							<!--							<Object>
 								<Index>#x0002</Index>
 								<Name>DummySINT</Name>
 								<Type>SINT</Type>
@@ -98672,7 +98672,7 @@
 									</Flags>
 								</SubItem>
 							</DataType>
-<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
+							<!-- objects 0x34B0 to 0x34B2 are only writable with EnDat and Hyperface-feedbacks, default read-only -->
 							<DataType>
 								<Name>DT34B0ARR</Name>
 								<BaseType>UDINT</BaseType>
@@ -100395,7 +100395,7 @@
 							</DataType>
 						</DataTypes>
 						<Objects>
-<!--							<Object>
+							<!--							<Object>
 								<Index>#x0002</Index>
 								<Name>DummySINT</Name>
 								<Type>SINT</Type>
