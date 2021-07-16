@@ -18,10 +18,10 @@ git clone https://gitlab.com/etherlab.org/ethercat.git
 git checkout stable-1.5
 cd ethercat
 ./bootstrap
-# Note I'm disabling EoE (ethernet over ethercat) to squelch the annoying "could not configure
-# interface" message - the eoe device shows up as a new network device which fails to configure.
-# I guess you could disable it from some ethernet config whatever but I don't need it anyway.
-./configure --disable-8139too --enable-generic --disable-eoe
+# Note: I previously added --disable-eoe here to squelch some annoying Cinnamon popups, but I ended
+# up going into network settings and disabling autoconnection instead. Adding --disable-eoe gives an
+# `Inappropriate ioctl for device` for some reason.
+./configure --disable-8139too --enable-generic
 make -j4
 make modules -j4
 sudo make install
@@ -40,13 +40,20 @@ echo 'KERNEL=="EtherCAT[0-9]*", MODE="0664" GROUP="plugdev"' | sudo tee -a /etc/
 sudo ethercatctl restart
 ```
 
+The ethernet device should look like this:
+
+```
+4: enx00e1000003fb: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 00:e1:00:00:03:fb brd ff:ff:ff:ff:ff:ff
+```
+
 Run the Rust code:
 
 ```bash
 ETHERCAT_PATH=/home/james/Repositories/ethercat-shit/ethercat-src cargo run
 ```
 
-Note that you might need to re-run the build above but _with_ EOE support - the bindings look for the presence of some stuff that's not compiled with `--disable-eoe`. I might PR a fix for this in the future. Doesn't cause an issue with the kernel modules.
+Note that if `ethercat-src` was compiled with `--disable-eoe`, some bindings won't work as the symbols they're looking for no longer exist. I might PR a fix for this in the future as an optional feature, but it doesn't cause an issue with my stuff today.
 
 ## USB ethernet adapter
 
@@ -79,3 +86,161 @@ MAC is `00:e1:00:00:03:fb`
   28: eoe0s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN mode DEFAULT group default qlen 1000
       link/ether 00:11:22:33:44:1c brd ff:ff:ff:ff:ff:ff
   ```
+
+## The AKD drive
+
+Note that the `ethercat-esi` dependency is aliased to a local path, the repo of which points to <https://github.com/jamwaffles/ethercat-esi/tree/fixes-for-akd> which has some un-PRed fixes in it at time of writing.
+
+`ethercat xml` gives this:
+
+```xml
+<?xml version="1.0" ?>
+<EtherCATInfo>
+  <!-- Slave 0 -->
+  <Vendor>
+    <Id>106</Id>
+  </Vendor>
+  <Descriptions>
+    <Devices>
+      <Device>
+        <Type ProductCode="#x00414b44" RevisionNo="#x00000002">AKD</Type>
+        <Name><![CDATA[AKD EtherCAT Drive (CoE)]]></Name>
+        <Sm Enable="1" StartAddress="#x1800" ControlByte="#x26" DefaultSize="1024" />
+        <Sm Enable="1" StartAddress="#x1c00" ControlByte="#x22" DefaultSize="1024" />
+        <Sm Enable="1" StartAddress="#x1100" ControlByte="#x24" DefaultSize="0" />
+        <Sm Enable="1" StartAddress="#x1140" ControlByte="#x20" DefaultSize="0" />
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1600</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+        </RxPdo>
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1601</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x6060</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>8</BitLen>
+            <Name></Name>
+            <DataType>UINT8</DataType>
+          </Entry>
+        </RxPdo>
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1602</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x607a</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </RxPdo>
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1603</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x60ff</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </RxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a00</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+        </TxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a01</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x6061</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>8</BitLen>
+            <Name></Name>
+            <DataType>UINT8</DataType>
+          </Entry>
+        </TxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a02</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x6064</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </TxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a03</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x606c</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </TxPdo>
+      </Device>
+    </Devices>
+  </Descriptions>
+</EtherCATInfo>
+```

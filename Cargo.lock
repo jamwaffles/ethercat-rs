@@ -141,6 +141,8 @@ dependencies = [
 [[package]]
 name = "ethercat"
 version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e6151c75ff98b4a3bd3ad27d6b852557676dfc5f38d155b08e802c02a4976adb"
 dependencies = [
  "derive-new",
  "ethercat-sys",
@@ -155,8 +157,6 @@ dependencies = [
 [[package]]
 name = "ethercat-esi"
 version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "956fd62403d2a4157f4b03dfd74e29ce3199b00b08758702a4c6835936666699"
 dependencies = [
  "ethercat-types",
  "serde",
@@ -166,6 +166,8 @@ dependencies = [
 [[package]]
 name = "ethercat-sys"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "07c4792965354f3e29f1d3279111e7270d79760d24d52e62e5cf1827d49003fa"
 dependencies = [
  "bindgen",
  "ioctl-sys",
