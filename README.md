@@ -89,6 +89,8 @@ MAC is `00:e1:00:00:03:fb`
 
 ## The AKD drive
 
+EtherCAT stuff specific to the drive is here <https://www.kollmorgen.com/sites/default/files/public_downloads/903-200005-00%20AKD%20EtherCAT%20Communications%20Manual%20EN%20REV%20U.pdf>
+
 Note that the `ethercat-esi` dependency is aliased to a local path, the repo of which points to <https://github.com/jamwaffles/ethercat-esi/tree/fixes-for-akd> which has some un-PRed fixes in it at time of writing.
 
 `ethercat xml` gives this:
@@ -244,3 +246,50 @@ Note that the `ethercat-esi` dependency is aliased to a local path, the repo of 
   </Descriptions>
 </EtherCATInfo>
 ```
+
+## Kollmorgen Workbench
+
+Must connect over Service/HMI interface - connecting over EtherCAT bus never works lmao. Connect the HMI port to the local network as a normal device.
+
+Kollmorgen Workbench works in VirtualBox, but the network interface must be set to "bridged" mode. I turned promiscuous mode to "all" but maybe that's not necessary, idk.
+
+## SOEM/SOES
+
+Simple Open EtherCAT Master/Slave
+
+<https://crates.io/crates/soem>
+
+<https://openethercatsociety.github.io/doc/soes/index.html>
+
+<https://openethercatsociety.github.io/doc/soem/index.html>
+
+C tutorial: <https://openethercatsociety.github.io/doc/soem/tutorial_8txt.html>
+
+---
+
+Also this one which seems newer <https://crates.io/crates/ethercat-soem> but incomplete.
+
+## SDO/PDO difference
+
+neotech
+PDO is hardware registers mapped, SDO is software registers, that can float
+SDO's are usually set on boot, as part of configuration
+PDO is where shit actually happens
+PDO's can be interupt read, SDO's cannot
+
+jamwaffles
+Right I see
+So I'd set e.g. encoder counts per rev in an SDO, but set velocity/read position from PDO
+
+neotech
+yeap
+<https://www.can-cia.org/fileadmin/resources/documents/proceedings/2005_rostan.pdf>
+your servo most likely implements this
+
+jamwaffles
+It does indeed
+
+neotech
+in some shape or another at least
+so reading up on the OpenCAN over ethercat standard is prob. a good starting point
+i think it was called CIA 4 or something like that
