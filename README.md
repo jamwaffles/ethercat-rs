@@ -1,5 +1,7 @@
 # EtherCAT test
 
+# Archived: please see [ethercrab-rs/ethercrab](https://github.com/ethercrab-rs/ethercrab) instead
+
 ## TODO
 
 - Load ESI (EtherCAT Slave Information) XML file into runtime with https://docs.rs/ethercat-esi/0.2.0/ethercat_esi/.
